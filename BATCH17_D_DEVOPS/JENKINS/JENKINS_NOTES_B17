@@ -981,3 +981,150 @@ REAL DEVOPS USE CASE
 
 
 
+====================================================================================
+
+
+DATE: 21 APR 2026
+
+==============================================================
+sed command -->
+sed 's/madhu/jenkins/' test > test2
+
+Replaces occurrences of a pattern with a specified replacement.
+Syntax: 
+
+
+sed s/pattern/replacement/g  > newupdatedfile
+
+sed 's/madhu/kiran/' input.txt     # Replace first occurrence of 'madhu' with 'kiran' in each line
+sed 's/madhu/kiran/g' input.txt    # Replace all occurrences of 'madhu' with 'kiran' in each line
+sed 's/madhu/kiran/2' input.txt    # Replace the second occurrence of ''madhu' with 'kiran' in each line
+
+-------
+STRAT
+madhu 
+kiran 
+raghu 
+rajesh 
+rahim 
+david 
+END 
+
+
+
+sed -i '/STRAT/,/END/c\BATCH17D' input.txt
+
+
+===============================================================
+vim jenkins_setup.sh
+
+#!/bin/bash 
+
+mount -o remount,size=4G /tmp
+sudo yum update –y
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/rpm-stable/jenkins.repo		
+sudo rpm --import https://pkg.jenkins.io/rpm-stable/jenkins.io-2026.key
+sudo yum upgrade -y
+sudo yum install java-21-amazon-corretto -y
+sudo yum install jenkins -y
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+
+
+======================
+manual setup apporach :
+cd /opt 
+
+java 
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.117/bin/apache-tomcat-9.0.117.tar.gz
+tar -xvf apache-tomcat-9.0.117.tar.gz
+cd apache-tomcat-9.0.117
+cd webapps/manager/META-INF/context.xml  ---> sed 
+
+cd conf/tomcat-users.xml --> backup --> add newfile 
+
+server.xml ---> connnectorport -8080 ---> replace --
+
+bin ---> start 
+
+
+
+======================================================================
+tomcat_setup.sh
+
+ 
+#!/bin/bash
+
+
+sudo yum install java -y
+cd /opt
+sudo wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.117/bin/apache-tomcat-9.0.117.tar.gz
+sudo tar -xvf /opt/apache-tomcat-9.0.117.tar.gz
+
+cd /opt/apache-tomcat-9.0.117/webapps/manager/META-INF
+
+sed -i '/<Context/,/<\/Context>/c\<Context antiResourceLocking="false" privileged="true" >\n</Context>' context.xml
+
+
+cd /opt/apache-tomcat-9.0.117/conf
+sudo mv tomcat-users.xml tomcat-users_bkup_21apr2026.xml
+sudo touch tomcat-users.xml
+sudo echo '<?xml version="1.0" encoding="utf-8"?>
+        <tomcat-users>
+        <role rolename="manager-gui"/>
+        <user username="tomcat" password="tomcat" roles="manager-gui, manager-script, manager-status"/>
+        </tomcat-users>' > tomcat-users.xml
+
+cd /opt/apache-tomcat-9.0.117/conf/
+sudo sed -i 's/Connector port="8080"/Connector port="8081"/g' server.xml
+sudo /opt/apache-tomcat-9.0.117/bin/startup.sh
+
+===================================================================
+
+GIT BASICS:
+
+git clone <url> 
+
+
+
+======================================================================
+============
+
+DATE: 22 APR 2026 
+
+
+JAVA  INSTALLATION widnows 
+
+JAVA_HOME:    C:\Program Files\Java\jdk-1.8
+
+C:\Program Files\Java\jdk1.8.0_481
+PATH : C:\Program Files\Java\jdk-1.8\bin
+
+============
+MVN INSTALLATION ON WINDOWS 
+M2_HOME  
+C:\Users\Madhu Kiran\Desktop\BATCH16-D\apache-maven-3.9.11-bin\apache-maven-3.9.11
+
+C:\Users\Madhukiran\Desktop\jenkinsd\apache-maven-3.9.15\bin
+
+PATH: 
+C:\Users\Madhu Kiran\Desktop\BATCH16-D\apache-maven-3.9.11-bin\apache-maven-3.9.11\bin
+
+
+MAVEN :
+
+APACHE MAVEN 
+
+JAVA 
+BUILD TOOL + PM TOOL 
+POM.XML 
+=======
+
+JAVA EVOLUTION: 
+
+
+
+===========================================================================
+
