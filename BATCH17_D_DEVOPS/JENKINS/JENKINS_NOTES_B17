@@ -1128,3 +1128,56 @@ JAVA EVOLUTION:
 
 ===========================================================================
 
+
+
+
+
+
+
+
+
+
+
+
+=================================================================================================
+
+DATE: 
+23 APR 2026
+
+
+SCP 
+
+scp src dest 
+
+scp -i jenkinskey.pem prabhas.txt ec2-user@ec2-13-218-146-145.compute-1.amazonaws.com:/tmp/.
+
+
+
+export JAVA_HOME=/opt/jdk1.8.0_491
+
+export PATH=JAVA_HOME/bin 
+
+
+****************************************
+Classic problem in SDLC
+
+Custom java installation on linux OS 
+
+***************************************
+
+JAVA_HOME :  /opt/jdk1.8.0_491
+path : /opt/jdk1.8.0_491/bin
+
+
+*******************************************************
+
+vim /etc/profile.d/java.sh
+
+export JAVA_HOME=/opt/jdk1.8.0_491
+export PATH=${JAVA_HOME}/bin:${PATH}
+
+*********************************************************
+source /etc/profile.d/java.sh
+
+
+
