@@ -1181,3 +1181,51 @@ source /etc/profile.d/java.sh
 
 
 
+
+================================================================================
+
+
+DATE: 25 APR 2026 
+
+
+maven repositories
+maven java dependencies
+maven life cycle
+
+
+
+
+MAVEN repositories
+
+ - LOCAL REPO   ---->   user home --> .m2 
+ - CENTRAL repos  ---> https://repo1.maven.org/maven2/
+ - REMOTE REPO  ---> HTTPS://XYZ..
+
+
+================
+MVN IS ALSO A PROJECT MANAGEMENT TOOL 
+
+PROJECT DIRECTORY STRUCTURE 
+
+HOW TO generate a new project skeleton (template).
+
+
+mvn archetype:generate
+
+ANT 
+GRADE ---> build.xml
+
+===========
+
+MAVEN LIFE CYCE :
+
+
+mvn clean install 
+mvn clean package 
+mvn clean deploy 
+
+
+https://www.linkedin.com/posts/madhukiran-gorekar_maven-buildlifecycle-devops-activity-7247579291457093633-GBIP?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAAOaZKYBgHqqOuWNEMewLeHAlTGV2Ykkh5A
+
+
+============================
