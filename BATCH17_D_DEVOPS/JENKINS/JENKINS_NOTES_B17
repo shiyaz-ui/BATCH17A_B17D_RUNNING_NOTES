@@ -1229,3 +1229,141 @@ https://www.linkedin.com/posts/madhukiran-gorekar_maven-buildlifecycle-devops-ac
 
 
 ============================
+
+
+
+DATE: 27 APR 2026
+
+WEBHOOK + GITHUB → JENKINS (NOTES)
+
+---
+
+WHAT IS A WEBHOOK?
+
+---
+
+A webhook is a mechanism for one application to send
+real-time data to another application when an event occurs.
+
+It works using HTTP requests (usually POST).
+
+Example:
+
+* Event: Code pushed to GitHub
+* Action: GitHub sends data to Jenkins automatically
+
+---
+
+WHY WEBHOOK IS USED?
+
+---
+
+To avoid polling (continuous checking).
+
+Without webhook:
+Jenkins keeps asking GitHub → "Any changes?"
+
+With webhook:
+GitHub directly tells Jenkins → "Code pushed!"
+
+Benefits:
+
+* Real-time trigger
+* Faster builds
+* Less resource usage
+
+---
+
+FLOW (GITHUB → JENKINS)
+
+---
+
+Developer pushes code to GitHub
+GitHub triggers webhook
+GitHub sends HTTP POST request
+Jenkins receives request
+Jenkins triggers job build
+
+---
+
+WHAT IS /github-webhook/ ?
+
+---
+
+/github-webhook/ is a special endpoint (URL path)
+provided by Jenkins GitHub plugin.
+
+Example:
+http://your-jenkins-url/github-webhook/
+
+It acts as a listener for GitHub events.
+
+---
+
+WHY WE MUST ADD /github-webhook/ ?
+
+---
+
+Because Jenkins only understands GitHub webhook
+requests on this specific endpoint.
+
+If NOT added:
+
+* Jenkins will not recognize request
+* Webhook will fail
+* No build will trigger
+
+Think of it like:
+
+* Normal URL → general access
+* /github-webhook/ → dedicated webhook receiver
+
+---
+
+WHAT HAPPENS INTERNALLY?
+
+---
+
+GitHub sends:
+POST /github-webhook/
+
+Jenkins:
+
+* Reads JSON payload
+* Identifies repository
+* Matches Jenkins job
+* Triggers build
+
+---
+
+WEBHOOK PAYLOAD (SIMPLE IDEA)
+
+---
+
+GitHub sends data like:
+
+* repository name
+* branch name
+* commit ID
+* author
+
+Format: JSON
+
+---
+
+IMPORTANT CONFIGURATION POINTS
+
+---
+
+In Jenkins:
+✔ Enable "GitHub hook trigger for GITScm polling"
+
+In GitHub:
+✔ Add webhook
+✔ Payload URL must be:
+http://your-jenkins-url/github-webhook/
+✔ Content type: application/json
+✔ Event: Push
+
+=================================================================================
+
